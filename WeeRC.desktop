@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=WeeRC
+Exec=WeeRC
+Name=WeeRC
+# translation example:
+# your app name in German locale (de)
+Name[de]=WeeRC
+
