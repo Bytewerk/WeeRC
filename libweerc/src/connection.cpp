@@ -11,7 +11,7 @@ void Connection::createConnection(const QString &ip, quint16 port, bool tls) {
     if (tls) {
         QSslSocket *sslSocket = new QSslSocket(this);
         QSslConfiguration config = sslSocket->sslConfiguration();
-        config.setProtocol(QSsl::TlsV1_0);
+        config.setProtocol(QSsl::TlsV1);
         sslSocket->setSslConfiguration(config);
         sslSocket->ignoreSslErrors();
         connect(sslSocket, SIGNAL(encrypted()), this, SLOT(encrypted()));
