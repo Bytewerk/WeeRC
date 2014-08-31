@@ -3,12 +3,11 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
-DEPENDPATH += . src ../libweerc/
-INCLUDEPATH += .
-LIBS = ../libweerc/libweerc.a
+TARGET = test_libweerc
 
-depends = ../libweerc
+PRE_TARGETDEPS += ../libweerc/libweerc.a
+INCLUDEPATH += . ../libweerc/src
+LIBS = ../libweerc/libweerc.a
 
 QMAKE_CXXFLAGS += -std=c++0x -O0
 QMAKE_LFLAGS += -std=c++0x -O0
@@ -19,3 +18,9 @@ CONFIG += console debug
 
 # Input
 SOURCES += src/main.cpp
+
+# libweerc
+lwrc.target = ../libweerc/libweerc.a
+lwrc.commands = cd ../libweerc && make
+lwrc.depends =
+QMAKE_EXTRA_TARGETS += lwrc
