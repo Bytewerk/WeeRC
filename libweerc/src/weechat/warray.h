@@ -1,3 +1,5 @@
+// vim: ts=4 sw=4 expandtab
+
 #ifndef WARRAY_H
 #define WARRAY_H
 
@@ -7,10 +9,19 @@
 class WArray : public WObject
 {
 public:
-    WArray();
-    virtual int parse(const QByteArray& data, uint start);
+    typedef QList<WObject*> ObjectList;
+
 private:
-    QList<WObject*> data;
+    ObjectList          m_data;
+    WObject::ObjectType m_dataType;
+
+public:
+    WArray();
+
+    WObject::ObjectType getDataType() { return m_dataType; }
+    const ObjectList&   getData()     { return m_data; }
+
+    virtual int parse(const QByteArray& data, uint start);
 };
 
 #endif // WARRAY_H

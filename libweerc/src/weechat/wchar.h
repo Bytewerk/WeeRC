@@ -1,3 +1,5 @@
+// vim: ts=4 sw=4 expandtab
+
 #ifndef WCHAR_H
 #define WCHAR_H
 
@@ -6,13 +8,15 @@
 
 class WChar : public WObject
 {
-public:
-    WChar();
-    QChar getValue();
-    void setValue(QChar value);
-    virtual int parse(const QByteArray& data, uint start);
 private:
     QChar m_value;
+
+public:
+    WChar();
+    QChar getValue() { return m_value; }
+    void setValue(QChar value) { m_value = value; }
+
+    virtual int parse(const QByteArray& data, uint start);
 };
 
 #endif // WCHAR_H

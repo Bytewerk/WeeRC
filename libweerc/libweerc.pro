@@ -3,7 +3,51 @@ TEMPLATE = lib
 TARGET = weerc
 
 QT += network
-CONFIG += staticlib
+CONFIG += staticlib debug
 
-HEADERS = ./src/connection.h ./src/weechat/wtime.h ./src/weechat/winfolistitemelement.h ./src/weechat/wobject.h ./src/weechat/wstring.h ./src/weechat/winfolistitem.h ./src/weechat/whashtable.h ./src/weechat/wlonginteger.h ./src/weechat/wpointer.h ./src/weechat/whdata.h ./src/weechat/wbuffer.h ./src/weechat/wclientmessage.h ./src/weechat/warray.h ./src/weechat/wchar.h ./src/weechat/winteger.h ./src/weechat/winfolist.h ./src/weechat/winfo.h ./src/weechat/wrelaymessage.h ./src/relayanswer.h ./src/messageparser.h
-SOURCES = ./src/weechat/whdata.cpp ./src/weechat/winfolistitemelement.cpp ./src/weechat/wstring.cpp ./src/weechat/wobject.cpp ./src/weechat/wtime.cpp ./src/weechat/winfo.cpp ./src/weechat/warray.cpp ./src/weechat/wchar.cpp ./src/weechat/whashtable.cpp ./src/weechat/wrelaymessage.cpp ./src/weechat/wclientmessage.cpp ./src/weechat/wpointer.cpp ./src/weechat/wlonginteger.cpp ./src/weechat/wbuffer.cpp ./src/weechat/winfolistitem.cpp ./src/weechat/winteger.cpp ./src/weechat/winfolist.cpp ./src/connection.cpp ./src/relayanswer.cpp ./src/messageparser.cpp
+QMAKE_CXXFLAGS += -std=c++0x -O0
+QMAKE_LFLAGS += -std=c++0x -O0
+
+HEADERS += ./src/connection.h
+HEADERS += ./src/messageparser.h
+HEADERS += ./src/weechat/warray.h
+HEADERS += ./src/weechat/wbuffer.h
+HEADERS += ./src/weechat/wchar.h
+HEADERS += ./src/weechat/whashtable.h
+HEADERS += ./src/weechat/whdata.h
+HEADERS += ./src/weechat/winfo.h
+HEADERS += ./src/weechat/winfolist.h
+HEADERS += ./src/weechat/winfolistitemelement.h
+HEADERS += ./src/weechat/winfolistitem.h
+HEADERS += ./src/weechat/winteger.h
+HEADERS += ./src/weechat/wlonginteger.h
+HEADERS += ./src/weechat/wobjectfactory.h
+HEADERS += ./src/weechat/wobject.h
+HEADERS += ./src/weechat/wpointer.h
+HEADERS += ./src/weechat/wrelaymessage.h
+HEADERS += ./src/weechat/wrelaymessagefactory.h
+HEADERS += ./src/weechat/winfomessage.h
+HEADERS += ./src/weechat/wstring.h
+HEADERS += ./src/weechat/wtime.h
+
+SOURCES += ./src/connection.cpp
+SOURCES += ./src/messageparser.cpp
+SOURCES += ./src/weechat/warray.cpp
+SOURCES += ./src/weechat/wbuffer.cpp
+SOURCES += ./src/weechat/wchar.cpp
+SOURCES += ./src/weechat/whashtable.cpp
+SOURCES += ./src/weechat/whdata.cpp
+SOURCES += ./src/weechat/winfo.cpp
+SOURCES += ./src/weechat/winfolist.cpp
+SOURCES += ./src/weechat/winfolistitem.cpp
+SOURCES += ./src/weechat/winfolistitemelement.cpp
+SOURCES += ./src/weechat/winteger.cpp
+SOURCES += ./src/weechat/wlonginteger.cpp
+SOURCES += ./src/weechat/wobject.cpp
+SOURCES += ./src/weechat/wobjectfactory.cpp
+SOURCES += ./src/weechat/wpointer.cpp
+SOURCES += ./src/weechat/wrelaymessage.cpp
+SOURCES += ./src/weechat/wrelaymessagefactory.cpp
+SOURCES += ./src/weechat/winfomessage.cpp
+SOURCES += ./src/weechat/wstring.cpp
+SOURCES += ./src/weechat/wtime.cpp

@@ -1,3 +1,5 @@
+// vim: ts=4 sw=4 expandtab
+
 #ifndef WINTEGER_H
 #define WINTEGER_H
 
@@ -5,14 +7,16 @@
 
 class WInteger : public WObject
 {
+private:
+    qint32 m_value;
+
 public:
     WInteger();
-    qint32 getValue();
-    void setValue(qint32);
-//    void parseFromNetworkData(const QByteArray& data);
+
+    qint32 getValue() { return m_value; };
+    void setValue(qint32 v) { m_value = v; };
+
     virtual int parse(const QByteArray& data, uint start);
-private:
-    qint32 value;
 };
 
 #endif // WINTEGER_H

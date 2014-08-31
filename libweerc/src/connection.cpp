@@ -1,6 +1,10 @@
+// vim: ts=4 sw=4 expandtab
+
 #include "connection.h"
 #include <QSslConfiguration>
 #include <QSsl>
+
+#include "messageparser.h"
 
 Connection::Connection(QObject *parent) :
     QObject(parent)
@@ -42,7 +46,12 @@ void Connection::connectionEstablished() {
 }
 
 void Connection::readSocketData() {
-    qDebug() << "Fetched data: " << m_socket->readAll().toHex();
+    QByteArray data = m_socket->readAll();
+
+    qDebug() << "Fetched data: " << data.toHex();
+
+    MessageParser mp;
+    mp.parse(data, 0);
 }
 
 void Connection::wInit(QString password, bool compression) {

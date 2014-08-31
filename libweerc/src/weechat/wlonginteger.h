@@ -1,3 +1,5 @@
+// vim: ts=4 sw=4 expandtab
+
 #ifndef WLONGINTEGER_H
 #define WLONGINTEGER_H
 
@@ -7,12 +9,14 @@ class WLongInteger : public WObject
 {
 public:
     WLongInteger();
-    qint64 getValue();
-    void setValue(qint64);
-//    void parseFromNetworkData(const QByteArray& data);
+
+    qint64 getValue() { return m_value; }
+    void setValue(qint64 value) { m_value = value; }
+
     virtual int parse(const QByteArray& data, uint start);
+
 private:
-    qint64 value;
+    qint64 m_value;
 };
 
 #endif // WLONGINTEGER_H

@@ -10,9 +10,12 @@ LIBS = ../libweerc/libweerc.a
 
 depends = ../libweerc
 
+QMAKE_CXXFLAGS += -std=c++0x -O0
+QMAKE_LFLAGS += -std=c++0x -O0
+
 QT -= gui
 QT += network
-CONFIG += console
+CONFIG += console debug
 
 # Input
 SOURCES += src/main.cpp

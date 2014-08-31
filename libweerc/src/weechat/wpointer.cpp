@@ -1,3 +1,8 @@
+// vim: ts=4 sw=4 expandtab
+
+#include <QString>
+#include <QLocale>
+
 #include "wpointer.h"
 
 WPointer::WPointer()
@@ -7,5 +12,17 @@ WPointer::WPointer()
 
 int WPointer::parse(const QByteArray &data, uint start)
 {
+    unsigned char len = data[start];
 
+    // special case for null pointers
+    if(len == 1 && data[start+1] == 0) {
+        m_value = 0; // NULL-Pointer
+        return 2;
+    }
+
+    QByteArray numdata = data.mid(start + 1, len);
+    QString    numstr  = "0x" + QString(numdata); // this is a hex-encoded number
+    m_value = QLocale::c().toULongLong(numstr);
+
+    return len + 1; // bytes processed
 }

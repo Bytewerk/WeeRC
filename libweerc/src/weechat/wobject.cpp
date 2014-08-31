@@ -1,3 +1,5 @@
+// vim: ts=4 sw=4 expandtab
+
 #include "wobject.h"
 
 WObject::WObject()
