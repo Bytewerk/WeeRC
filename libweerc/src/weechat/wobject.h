@@ -4,6 +4,7 @@
 #define WOBJECT_H
 
 #include <QByteArray>
+#include <QString>
 
 #include <memory>
 
@@ -14,15 +15,17 @@ public:
         Array,
         Buffer,
         Char,
-        Hashtable,
+        HashTable,
         Hdata,
         Info,
         Infolist,
         Integer,
-        Longinteger,
+        LongInteger,
         Pointer,
         String,
-        Time
+        Time,
+        Type,
+        Unknown
     };
 protected:
     ObjectType m_objectType;
@@ -37,8 +40,10 @@ public:
      * \returns  The number of bytes processed.
      */
     virtual int parse(const QByteArray& data, uint start) = 0;
+
+    static ObjectType typeFromStr(const QString &str);
 };
 
-typedef std::unique_ptr<WObject> WObjectPtr;
+typedef std::shared_ptr<WObject> WObjectPtr;
 
 #endif // WOBJECT_H

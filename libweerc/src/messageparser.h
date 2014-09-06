@@ -5,12 +5,20 @@
 
 #include "weechat/wrelaymessage.h"
 
-class MessageParser
+#include <QObject>
+
+class MessageParser : public QObject
 {
+    Q_OBJECT
+
 public:
     MessageParser();
+    virtual ~MessageParser();
 
     virtual int parse(const QByteArray &data, int start);
+
+signals:
+    void messageParsed(WRelayMessagePtr message);
 };
 
 #endif // MESSAGEPARSER_H

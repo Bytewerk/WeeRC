@@ -10,6 +10,7 @@ QMAKE_LFLAGS += -std=c++0x -O0
 
 HEADERS += ./src/connection.h
 HEADERS += ./src/messageparser.h
+HEADERS += ./src/protocolhandler.h
 HEADERS += ./src/weechat/warray.h
 HEADERS += ./src/weechat/wbuffer.h
 HEADERS += ./src/weechat/wchar.h
@@ -29,9 +30,11 @@ HEADERS += ./src/weechat/wrelaymessagefactory.h
 HEADERS += ./src/weechat/winfomessage.h
 HEADERS += ./src/weechat/wstring.h
 HEADERS += ./src/weechat/wtime.h
+HEADERS += ./src/weechat/wtype.h
 
 SOURCES += ./src/connection.cpp
 SOURCES += ./src/messageparser.cpp
+SOURCES += ./src/protocolhandler.cpp
 SOURCES += ./src/weechat/warray.cpp
 SOURCES += ./src/weechat/wbuffer.cpp
 SOURCES += ./src/weechat/wchar.cpp
@@ -51,3 +54,4 @@ SOURCES += ./src/weechat/wrelaymessagefactory.cpp
 SOURCES += ./src/weechat/winfomessage.cpp
 SOURCES += ./src/weechat/wstring.cpp
 SOURCES += ./src/weechat/wtime.cpp
+SOURCES += ./src/weechat/wtype.cpp

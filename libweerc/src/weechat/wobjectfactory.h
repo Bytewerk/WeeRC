@@ -11,6 +11,7 @@ class WObjectFactory
 {
 public:
     static WObjectPtr fromTypeString(const QString &str);
+    static WObjectPtr fromType(WObject::ObjectType type);
 };
 
 #endif // WOBJECTFACTORY_H

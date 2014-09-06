@@ -13,6 +13,10 @@ MessageParser::MessageParser()
 {
 }
 
+MessageParser::~MessageParser()
+{
+}
+
 int MessageParser::parse(const QByteArray &data, int start)
 {
     qint32 len_be = 0;
@@ -41,7 +45,6 @@ int MessageParser::parse(const QByteArray &data, int start)
 
     // TODO: if compression, decompress msgdata
 
-
     // message id
     WString wstr;
     start += wstr.parse(msgdata, start);
@@ -54,7 +57,8 @@ int MessageParser::parse(const QByteArray &data, int start)
 
         WRelayMessagePtr message = WRelayMessageFactory::fromTypeString(type);
         start += message->parse(msgdata, start);
-        message->debugPrint();
+
+        emit messageParsed(message);
     }
 
     return msglen;

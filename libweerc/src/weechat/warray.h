@@ -9,7 +9,7 @@
 class WArray : public WObject
 {
 public:
-    typedef QList<WObject*> ObjectList;
+    typedef QList<WObjectPtr> ObjectList;
 
 private:
     ObjectList          m_data;

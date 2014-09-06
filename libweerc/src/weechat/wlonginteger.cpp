@@ -5,7 +5,7 @@
 #include "wlonginteger.h"
 
 WLongInteger::WLongInteger()
-    : WObject(WObject::Longinteger)
+    : WObject(WObject::LongInteger)
 {
 }
 

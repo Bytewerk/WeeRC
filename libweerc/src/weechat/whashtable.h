@@ -4,22 +4,21 @@
 #include "wobject.h"
 #include <QMap>
 
-class WHashtable : public WObject
+class WHashTable : public WObject
 {
 public:
-    WHashtable();
-    WObject::ObjectType getKeysType();
-    void setKeysType(WObject::ObjectType keysType);
-    WObject::ObjectType getValuesType();
-    void setValuesType(WObject::ObjectType valuesType);
-    qint8 getCount();
-    void setCount(qint8 count);
+    WHashTable();
+
+    WObject::ObjectType getKeysType() { return m_keysType; }
+    WObject::ObjectType getValuesType() { return m_valuesType; }
+    int getCount() { return m_hashtable.size(); }
+
     virtual int parse(const QByteArray& data, uint start);
 private:
-    WObject::ObjectType keysType;
-    WObject::ObjectType valuesType;
-    qint8 count;
-    QMap<WObject*, WObject*> hashtable;
+    WObject::ObjectType m_keysType;
+    WObject::ObjectType m_valuesType;
+
+    QMap<WObjectPtr, WObjectPtr> m_hashtable;
 };
 
 #endif // WHASHTABLE_H

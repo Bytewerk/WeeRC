@@ -5,13 +5,15 @@
 #include <QSsl>
 
 #include "messageparser.h"
+#include "protocolhandler.h"
 
 Connection::Connection(QObject *parent) :
-    QObject(parent)
+    QObject(parent), m_handler(NULL)
 {
 }
 
-void Connection::createConnection(const QString &ip, quint16 port, bool tls) {
+void Connection::createConnection(const QString &ip, quint16 port, bool tls)
+{
     if (tls) {
         QSslSocket *sslSocket = new QSslSocket(this);
         QSslConfiguration config = sslSocket->sslConfiguration();
@@ -37,27 +39,24 @@ void Connection::createConnection(const QString &ip, quint16 port, bool tls) {
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(readSocketData()));
 }
 
-void Connection::socketError(QAbstractSocket::SocketError e) {
+void Connection::socketError(QAbstractSocket::SocketError e)
+{
     qDebug() << "Connection error: " << m_socket->errorString() << "(" << e << ")";
 }
 
-void Connection::connectionEstablished() {
+void Connection::connectionEstablished()
+{
     qDebug() << "Connection established!";
+    m_handler->initConnection();
 }
 
-void Connection::readSocketData() {
+void Connection::readSocketData()
+{
     QByteArray data = m_socket->readAll();
 
     qDebug() << "Fetched data: " << data.toHex();
 
-    MessageParser mp;
-    mp.parse(data, 0);
-}
-
-void Connection::wInit(QString password, bool compression) {
-    m_socket->write(("(12) init password=" + password + ",compression=" + (compression ? "on" : "off") + "\n").toUtf8());
-    m_socket->write(QString("info version\n").toUtf8());
-    qDebug() << "wInit()";
+    m_handler->dataReceived(data);
 }
 
 void Connection::encrypted()
@@ -65,4 +64,12 @@ void Connection::encrypted()
     qDebug() << "SSL handshake was successful!";
 }
 
+void Connection::setProtocolHandler(ProtocolHandler *handler)
+{
+    m_handler = handler;
+}
 
+void Connection::sendData(const QByteArray &data)
+{
+    m_socket->write(data);
+}

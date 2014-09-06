@@ -50,6 +50,6 @@ public:
     virtual void debugPrint(void) = 0;
 };
 
-typedef std::unique_ptr<WRelayMessage> WRelayMessagePtr;
+typedef std::shared_ptr<WRelayMessage> WRelayMessagePtr;
 
 #endif // WRELAYMESSAGE_H

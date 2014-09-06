@@ -14,17 +14,24 @@
 
 WObjectPtr WObjectFactory::fromTypeString(const QString &str)
 {
-    // basic types
-    if     (str == "chr") { return WObjectPtr(new WChar()); }
-    else if(str == "int") { return WObjectPtr(new WInteger()); }
-    else if(str == "lon") { return WObjectPtr(new WLongInteger()); }
-    else if(str == "str") { return WObjectPtr(new WString()); }
-    else if(str == "buf") { return WObjectPtr(new WBuffer()); }
-    else if(str == "ptr") { return WObjectPtr(new WPointer()); }
-    else if(str == "tim") { return WObjectPtr(new WTime()); }
-    else if(str == "arr") { return WObjectPtr(new WArray()); }
-    // advanced types
-    else if(str == "inf") { return WObjectPtr(new WInfo()); }
-    // unknown type
-    else                  { return NULL; }
+    return fromType(WObject::typeFromStr(str));
+}
+
+WObjectPtr WObjectFactory::fromType(WObject::ObjectType type)
+{
+    switch(type) {
+        // basic types
+        case WObject::Char:         return WObjectPtr(new WChar());        break;
+        case WObject::Integer:      return WObjectPtr(new WInteger());     break;
+        case WObject::LongInteger:  return WObjectPtr(new WLongInteger()); break;
+        case WObject::String:       return WObjectPtr(new WString());      break;
+        case WObject::Buffer:       return WObjectPtr(new WBuffer());      break;
+        case WObject::Pointer:      return WObjectPtr(new WPointer());     break;
+        case WObject::Time:         return WObjectPtr(new WTime());        break;
+        case WObject::Array:        return WObjectPtr(new WArray());       break;
+        // advanced types
+        case WObject::Info:         return WObjectPtr(new WInfo());        break;
+        // unknown type
+        default:           return NULL;
+    }
 }
