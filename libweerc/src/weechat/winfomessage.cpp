@@ -16,5 +16,5 @@ int WInfoMessage::parse(const QByteArray &data, int start)
 
 void WInfoMessage::debugPrint(void)
 {
-    qDebug() << m_info.getName() << " => " << m_info.getValue();
+    qDebug() << m_info.repr();
 }

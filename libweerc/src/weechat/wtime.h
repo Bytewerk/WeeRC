@@ -15,6 +15,8 @@ public:
     qint64 getValue() { return m_value; }
     void setValue(qint64 value) { m_value = value; }
     virtual int parse(const QByteArray& data, uint start);
+
+    virtual QString repr(void);
 };
 
 #endif // WTIME_H

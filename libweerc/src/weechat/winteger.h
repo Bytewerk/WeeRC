@@ -17,6 +17,8 @@ public:
     void setValue(qint32 v) { m_value = v; };
 
     virtual int parse(const QByteArray& data, uint start);
+
+    virtual QString repr(void);
 };
 
 #endif // WINTEGER_H

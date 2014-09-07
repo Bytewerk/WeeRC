@@ -30,3 +30,12 @@ int WString::parse(const QByteArray &data, uint start)
         return len + 4;
     }
 }
+
+QString WString::repr(void)
+{
+    if(m_null) {
+        return "[" + WObject::typeToStr(m_objectType) + ":" + "NULL" + "]";
+    } else {
+        return "[" + WObject::typeToStr(m_objectType) + ":" + "\"" + m_value + "\"" + "]";
+    }
+}

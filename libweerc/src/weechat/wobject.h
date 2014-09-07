@@ -41,7 +41,15 @@ public:
      */
     virtual int parse(const QByteArray& data, uint start) = 0;
 
+    /*!
+     * Get a textual representation of the object.
+     *
+     * \returns A QString representing the object's data.
+     */
+    virtual QString repr(void) = 0;
+
     static ObjectType typeFromStr(const QString &str);
+    static QString typeToStr(ObjectType str);
 };
 
 typedef std::shared_ptr<WObject> WObjectPtr;

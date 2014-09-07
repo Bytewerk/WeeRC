@@ -12,3 +12,12 @@ int WChar::parse(const QByteArray &data, uint start)
     m_value = data[start];
     return 1;
 }
+
+QString WChar::repr(void)
+{
+    if(m_value.isPrint()) {
+        return "[" + WObject::typeToStr(m_objectType) + ":" + m_value + "]";
+    } else {
+        return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value.digitValue()) + "]";
+    }
+}

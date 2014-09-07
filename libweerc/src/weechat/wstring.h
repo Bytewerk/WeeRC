@@ -22,6 +22,8 @@ public:
     void setNull(bool null) { m_null = null; }
 
     virtual int parse(const QByteArray& data, uint start);
+
+    virtual QString repr(void);
 };
 
 #endif // WSTRING_H

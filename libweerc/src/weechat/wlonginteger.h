@@ -15,6 +15,8 @@ public:
 
     virtual int parse(const QByteArray& data, uint start);
 
+    virtual QString repr(void);
+
 private:
     qint64 m_value;
 };

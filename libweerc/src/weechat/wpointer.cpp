@@ -1,7 +1,6 @@
 // vim: ts=4 sw=4 expandtab
 
 #include <QString>
-#include <QLocale>
 
 #include "wpointer.h"
 
@@ -22,7 +21,12 @@ int WPointer::parse(const QByteArray &data, uint start)
 
     QByteArray numdata = data.mid(start + 1, len);
     QString    numstr  = "0x" + QString(numdata); // this is a hex-encoded number
-    m_value = QLocale::c().toULongLong(numstr);
+    m_value = numstr.toULongLong();
 
     return len + 1; // bytes processed
+}
+
+QString WPointer::repr(void)
+{
+    return "[" + WObject::typeToStr(m_objectType) + ":" + "0x" + QString::number(m_value, 16) + "]";
 }

@@ -39,3 +39,16 @@ int WArray::parse(const QByteArray &data, uint start)
 
 	return start - origStart;
 }
+
+QString WArray::repr(void)
+{
+	QString dataStr;
+
+	bool first = true;
+	for(WObjectPtr obj: m_data) {
+		dataStr += (first ? "" : ", ") + obj->repr();
+	}
+
+	return "[" + WObject::typeToStr(m_objectType) + "(" + WObject::typeToStr(m_dataType) + "): "
+		+ dataStr + "]";
+}

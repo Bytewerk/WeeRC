@@ -22,6 +22,8 @@ public:
     const ObjectList&   getData()     { return m_data; }
 
     virtual int parse(const QByteArray& data, uint start);
+
+    virtual QString repr(void);
 };
 
 #endif // WARRAY_H

@@ -27,3 +27,22 @@ WObject::ObjectType WObject::typeFromStr(const QString &str)
     // unknown type
     else                  { return Unknown; }
 }
+
+QString WObject::typeToStr(ObjectType type)
+{
+    switch(type) {
+    // basic types
+    case Char:        return "chr"; break;
+    case Integer:     return "int"; break;
+    case LongInteger: return "lon"; break;
+    case String:      return "str"; break;
+    case Buffer:      return "buf"; break;
+    case Pointer:     return "ptr"; break;
+    case Time:        return "tim"; break;
+    case Array:       return "arr"; break;
+    // advanced types
+    case Info:        return "inf"; break;
+    // unknown type
+    default:          return "???";
+    }
+}

@@ -50,3 +50,18 @@ int WHashTable::parse(const QByteArray &data, uint start)
 
 	return start - origStart;
 }
+
+QString WHashTable::repr(void)
+{
+	QString dataStr;
+
+	bool first = true;
+	for(WObjectPtr key: m_hashtable.keys()) {
+		WObjectPtr value = m_hashtable.value(key);
+
+		dataStr += (first ? "(" : ", (") + key->repr() + " -> " + value->repr() + ")";
+	}
+
+	return "[" + WObject::typeToStr(m_objectType) + "(" + WObject::typeToStr(m_keysType) + ", " + WObject::typeToStr(m_valuesType) + "): "
+		+ dataStr + "]";
+}

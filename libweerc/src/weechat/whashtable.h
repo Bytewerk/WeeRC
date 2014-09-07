@@ -14,6 +14,8 @@ public:
     int getCount() { return m_hashtable.size(); }
 
     virtual int parse(const QByteArray& data, uint start);
+		QString repr(void);
+
 private:
     WObject::ObjectType m_keysType;
     WObject::ObjectType m_valuesType;

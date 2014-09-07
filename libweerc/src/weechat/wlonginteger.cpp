@@ -14,7 +14,12 @@ int WLongInteger::parse(const QByteArray &data, uint start)
     unsigned char len = data[start];
 
     QByteArray numdata = data.mid(start + 1, len);
-    m_value = QLocale::c().toLongLong(numdata);
+    m_value = numdata.toLongLong();
 
     return len + 1; // bytes processed
+}
+
+QString WLongInteger::repr(void)
+{
+    return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value) + "]";
 }

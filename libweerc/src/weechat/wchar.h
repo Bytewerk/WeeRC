@@ -17,6 +17,8 @@ public:
     void setValue(QChar value) { m_value = value; }
 
     virtual int parse(const QByteArray& data, uint start);
+
+    virtual QString repr(void);
 };
 
 #endif // WCHAR_H
