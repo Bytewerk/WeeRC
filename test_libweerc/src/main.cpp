@@ -32,6 +32,7 @@ public slots:
 
 		m_messageParser = new MessageParser();
 		connect(m_messageParser, SIGNAL(messageParsed(WRelayMessagePtr)), this, SLOT(handleWeechatMessage(WRelayMessagePtr)));
+		connect(m_protoHandler, SIGNAL(connectionInitialized()), this, SLOT(connectionInitialized()));
 
 		m_protoHandler->setParser(m_messageParser);
 
@@ -40,6 +41,12 @@ public slots:
 		Connection::instance().createConnection("localhost", 8001, false);
 
 		//QTimer::singleShot(3000, this, SLOT(shutdown()));
+	}
+
+	void connectionInitialized(void)
+	{
+		qDebug() << "Connection initialized";
+		m_protoHandler->registerBufferUpdates();
 	}
 
 	void handleWeechatMessage(WRelayMessagePtr message) {

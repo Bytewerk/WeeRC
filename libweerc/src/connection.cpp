@@ -54,7 +54,7 @@ void Connection::readSocketData()
 {
     QByteArray data = m_socket->readAll();
 
-    qDebug() << "Fetched data: " << data.toHex();
+    qDebug() << "Fetched data: " << data.toPercentEncoding();
 
     m_handler->dataReceived(data);
 }

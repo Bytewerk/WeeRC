@@ -19,12 +19,15 @@ private:
 	QString        m_password;
 	bool           m_useCompression;
 
+	bool           m_initRequested;
+
 public:
 	ProtocolHandler();
 	ProtocolHandler(const QString &password, bool enableCompression);
 	~ProtocolHandler();
 
 	void initConnection();
+	void registerBufferUpdates();
 
 	void setPassword(const QString& password) { m_password = password; }
 	void setCompression(bool enable) { m_useCompression = enable; }
@@ -33,6 +36,9 @@ public:
 
 public slots:
 	void dataReceived(const QByteArray& data);
+
+signals:
+	void connectionInitialized();
 };
 
 #endif // PROTOCOLHANDLER_H

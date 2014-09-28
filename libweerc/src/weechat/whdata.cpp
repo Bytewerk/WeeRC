@@ -39,8 +39,6 @@ int WHdata::parse(const QByteArray &data, uint start)
 		WObject::ObjectType type = WObject::typeFromStr(keyTypeParts[1]);
 
 		m_keyTypes.append(KeyTypePair(key, type));
-
-		qDebug() << "Added structure field" << key << "with data type" << type;
 	}
 
 	// read number of elements
@@ -53,7 +51,7 @@ int WHdata::parse(const QByteArray &data, uint start)
 		HdataItem item;
 
 		// p-path
-		for(int ppathIdx = 0; ppathIdx < m_hdataPath.size(); i++) {
+		for(int ppathIdx = 0; ppathIdx < m_hdataPath.size(); ppathIdx++) {
 			WObjectPtr ptr(new WPointer());
 
 			start += ptr->parse(data, start);

@@ -1,5 +1,6 @@
 // vim: ts=4 sw=4 expandtab
 
+#include <QDebug>
 #include <QString>
 
 #include "wpointer.h"
@@ -19,9 +20,11 @@ int WPointer::parse(const QByteArray &data, uint start)
         return 2;
     }
 
-    QByteArray numdata = data.mid(start + 1, len);
-    QString    numstr  = "0x" + QString(numdata); // this is a hex-encoded number
-    m_value = numstr.toULongLong();
+    QString numdata = data.mid(start + 1, len);
+    m_value = numdata.toULongLong(NULL, 16);
+
+    qDebug() << len;
+    qDebug() << numdata;
 
     return len + 1; // bytes processed
 }

@@ -9,6 +9,8 @@
 #include "wtime.h"
 #include "warray.h"
 #include "winfo.h"
+#include "whdata.h"
+#include "whashtable.h"
 
 #include "wobjectfactory.h"
 
@@ -31,6 +33,8 @@ WObjectPtr WObjectFactory::fromType(WObject::ObjectType type)
         case WObject::Array:        return WObjectPtr(new WArray());       break;
         // advanced types
         case WObject::Info:         return WObjectPtr(new WInfo());        break;
+        case WObject::Hdata:        return WObjectPtr(new WHdata());       break;
+        case WObject::HashTable:    return WObjectPtr(new WHashTable());   break;
         // unknown type
         default:           return NULL;
     }

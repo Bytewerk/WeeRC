@@ -30,7 +30,10 @@ public:
         Pong,
         Upgrade,
         UpgradeEnded,
-        Info
+        Info,
+
+        // for quick and dirty testing
+        Hdata
     };
 
 private:

@@ -24,6 +24,8 @@ WObject::ObjectType WObject::typeFromStr(const QString &str)
     else if(str == "arr") { return Array; }
     // advanced types
     else if(str == "inf") { return Info; }
+    else if(str == "hda") { return Hdata; }
+    else if(str == "htb") { return HashTable; }
     // unknown type
     else                  { return Unknown; }
 }
@@ -42,6 +44,8 @@ QString WObject::typeToStr(ObjectType type)
     case Array:       return "arr"; break;
     // advanced types
     case Info:        return "inf"; break;
+    case Hdata:       return "hda"; break;
+    case HashTable:   return "htb"; break;
     // unknown type
     default:          return "???";
     }

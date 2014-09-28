@@ -21,12 +21,8 @@ int WArray::parse(const QByteArray &data, uint start)
 	start += wtype.parse(data, start);
 	m_dataType = wtype.getValue();
 
-	qDebug() << "Data type:" << m_dataType;
-
 	start += wint.parse(data, start);
 	int numElements = wint.getValue();
-
-	qDebug() << "Number of Elements:" << numElements;
 
 	m_data.clear();
 	for(int i = 0; i < numElements; i++) {
