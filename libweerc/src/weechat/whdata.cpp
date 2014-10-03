@@ -74,7 +74,7 @@ int WHdata::parse(const QByteArray &data, uint start)
 	return start - origStart;
 }
 
-QString WHdata::repr(void)
+QString WHdata::repr(void) const
 {
 	QString description;
 
@@ -92,7 +92,7 @@ QString WHdata::repr(void)
 	description += "h-path: [" + m_hdataPath.join(", ") + "]\n";
 
 	for(int i = 0; i < m_items.size(); i++) {
-		HdataItem &item = m_items[i];
+		const HdataItem &item = m_items[i];
 
 		description += QString("Item %1:\n").arg(i);
 

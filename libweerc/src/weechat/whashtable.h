@@ -9,12 +9,12 @@ class WHashTable : public WObject
 public:
     WHashTable();
 
-    WObject::ObjectType getKeysType() { return m_keysType; }
-    WObject::ObjectType getValuesType() { return m_valuesType; }
-    int getCount() { return m_hashtable.size(); }
+    WObject::ObjectType getKeysType() const { return m_keysType; }
+    WObject::ObjectType getValuesType() const { return m_valuesType; }
+    int getCount() const { return m_hashtable.size(); }
 
     virtual int parse(const QByteArray& data, uint start);
-		QString repr(void);
+		QString repr(void) const;
 
 private:
     WObject::ObjectType m_keysType;

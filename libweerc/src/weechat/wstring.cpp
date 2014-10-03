@@ -31,7 +31,7 @@ int WString::parse(const QByteArray &data, uint start)
     }
 }
 
-QString WString::repr(void)
+QString WString::repr(void) const
 {
     if(m_null) {
         return "[" + WObject::typeToStr(m_objectType) + ":" + "NULL" + "]";

@@ -10,12 +10,12 @@ class WLongInteger : public WObject
 public:
     WLongInteger();
 
-    qint64 getValue() { return m_value; }
+    qint64 getValue() const { return m_value; }
     void setValue(qint64 value) { m_value = value; }
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 
 private:
     qint64 m_value;

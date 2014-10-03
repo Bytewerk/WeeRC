@@ -18,12 +18,12 @@ private:
 public:
     WArray();
 
-    WObject::ObjectType getDataType() { return m_dataType; }
-    const ObjectList&   getData()     { return m_data; }
+    WObject::ObjectType getDataType() const { return m_dataType; }
+    const ObjectList&   getData()     const { return m_data; }
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WARRAY_H

@@ -13,12 +13,12 @@ private:
 
 public:
     WChar();
-    QChar getValue() { return m_value; }
+    QChar getValue() const { return m_value; }
     void setValue(QChar value) { m_value = value; }
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WCHAR_H

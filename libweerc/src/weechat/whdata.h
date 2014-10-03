@@ -36,7 +36,11 @@ public:
 
 	virtual int parse(const QByteArray& data, uint start);
 
-	virtual QString repr(void);
+	const KeyTypeList& getKeyTypes(void) const { return m_keyTypes; }
+	const ItemList& getItems(void) const { return m_items; }
+	const QStringList& getHdataPath(void) const { return m_hdataPath; }
+
+	virtual QString repr(void) const;
 };
 
 #endif // WHDATA_H

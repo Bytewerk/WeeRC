@@ -36,7 +36,7 @@ int WArray::parse(const QByteArray &data, uint start)
 	return start - origStart;
 }
 
-QString WArray::repr(void)
+QString WArray::repr(void) const
 {
 	QString dataStr;
 

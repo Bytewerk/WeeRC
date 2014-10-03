@@ -14,15 +14,15 @@ private:
 public:
     WBuffer();
 
-    QByteArray getValue() { return m_value; }
+    QByteArray getValue() const { return m_value; }
     void setValue(const QByteArray &value) { m_value = value; }
 
-    bool isNull() { return m_null; }
+    bool isNull() const { return m_null; }
     void setNull(bool null) { m_null = null; }
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WBUFFER_H

@@ -48,7 +48,7 @@ int WHashTable::parse(const QByteArray &data, uint start)
 	return start - origStart;
 }
 
-QString WHashTable::repr(void)
+QString WHashTable::repr(void) const
 {
 	QString dataStr;
 

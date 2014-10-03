@@ -14,15 +14,15 @@ private:
 public:
     WInfo();
 
-    QString getName() { return m_name; }
+    QString getName() const { return m_name; }
     void setName(QString name) { m_name = name; }
 
-    QString getValue() { return m_value; }
+    QString getValue() const { return m_value; }
     void setValue(QString value) { m_value = value; }
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WINFO_H

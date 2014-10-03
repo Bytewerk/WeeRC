@@ -19,7 +19,7 @@ int WLongInteger::parse(const QByteArray &data, uint start)
     return len + 1; // bytes processed
 }
 
-QString WLongInteger::repr(void)
+QString WLongInteger::repr(void) const
 {
     return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value) + "]";
 }

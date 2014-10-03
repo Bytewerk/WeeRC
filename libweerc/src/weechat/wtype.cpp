@@ -17,7 +17,7 @@ int WType::parse(const QByteArray &data, uint start)
     return 3; // bytes processed
 }
 
-QString WType::repr(void)
+QString WType::repr(void) const
 {
     return "[" + WObject::typeToStr(m_objectType) + ": " + QString::number(m_value) + "]";
 }

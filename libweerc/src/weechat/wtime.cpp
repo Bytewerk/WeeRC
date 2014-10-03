@@ -17,7 +17,7 @@ int WTime::parse(const QByteArray &data, uint start)
     return len + 1; // bytes processed
 }
 
-QString WTime::repr(void)
+QString WTime::repr(void) const
 {
     return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value) + "]";
 }

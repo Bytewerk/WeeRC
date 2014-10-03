@@ -23,7 +23,7 @@ int WInteger::parse(const QByteArray &data, uint start)
     return 4; // bytes read
 }
 
-QString WInteger::repr(void)
+QString WInteger::repr(void) const
 {
     return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value) + "]";
 }

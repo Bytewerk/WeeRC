@@ -13,12 +13,12 @@ private:
 public:
     WInteger();
 
-    qint32 getValue() { return m_value; };
+    qint32 getValue() const { return m_value; };
     void setValue(qint32 v) { m_value = v; };
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WINTEGER_H

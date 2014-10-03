@@ -13,7 +13,7 @@ int WChar::parse(const QByteArray &data, uint start)
     return 1;
 }
 
-QString WChar::repr(void)
+QString WChar::repr(void) const
 {
     if(m_value.isPrint()) {
         return "[" + WObject::typeToStr(m_objectType) + ":" + m_value + "]";

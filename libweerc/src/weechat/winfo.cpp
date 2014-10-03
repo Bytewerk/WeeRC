@@ -28,7 +28,7 @@ int WInfo::parse(const QByteArray &data, uint start)
     return start - origStart;
 }
 
-QString WInfo::repr(void)
+QString WInfo::repr(void) const
 {
 	return "[" + WObject::typeToStr(m_objectType) + ": " + m_name + "=" + m_value + "]";
 }

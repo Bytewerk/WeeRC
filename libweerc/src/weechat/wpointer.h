@@ -7,16 +7,19 @@
 
 class WPointer : public WObject
 {
+public:
+    typedef qint64 value_type;
+
 private:
-    qint64 m_value;
+    value_type m_value;
 
 public:
     WPointer();
-    qint64 getValue() { return m_value; }
-    void setValue(qint64 value) { m_value = value; }
+    value_type getValue() const { return m_value; }
+    void setValue(value_type value) { m_value = value; }
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WPOINTER_H

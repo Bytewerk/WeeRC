@@ -46,7 +46,7 @@ public:
      *
      * \returns A QString representing the object's data.
      */
-    virtual QString repr(void) = 0;
+    virtual QString repr(void) const = 0;
 
     static ObjectType typeFromStr(const QString &str);
     static QString typeToStr(ObjectType str);

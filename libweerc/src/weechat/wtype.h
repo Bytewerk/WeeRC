@@ -13,11 +13,11 @@ private:
 public:
     WType();
 
-    WObject::ObjectType getValue() { return m_value; };
+    WObject::ObjectType getValue() const { return m_value; };
 
     virtual int parse(const QByteArray& data, uint start);
 
-    virtual QString repr(void);
+    virtual QString repr(void) const;
 };
 
 #endif // WTYPE_H
