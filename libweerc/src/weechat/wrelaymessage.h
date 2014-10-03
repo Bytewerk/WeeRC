@@ -32,8 +32,11 @@ public:
         UpgradeEnded,
         Info,
 
-        // for quick and dirty testing
-        Hdata
+        // Special custom messages
+        BufferList,
+
+        // for generic object parsing
+        Object
     };
 
 private:

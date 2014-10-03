@@ -5,10 +5,12 @@
 
 #include "wrelaymessage.h"
 
+#include "wstring.h"
+
 class WRelayMessageFactory
 {
 public:
-    static WRelayMessagePtr fromTypeString(const QString &str);
+    static WRelayMessagePtr fromMessageID(const WString &wstr);
 };
 
 #endif // WRELAYMESSAGEFACTORY_H

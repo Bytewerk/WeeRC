@@ -1,10 +1,35 @@
 #include <QtCore>
+#include <QThread>
+
+#include <iostream>
 
 #include "../../libweerc/src/weechat/whashtable.h"
 
 #include "../../libweerc/src/connection.h"
 #include "../../libweerc/src/protocolhandler.h"
 #include "../../libweerc/src/messageparser.h"
+
+class ConsoleHandler : public QThread
+{
+	Q_OBJECT
+
+public:
+	void run(void)
+	{
+		std::string line;
+
+		while(true) {
+			std::cout << "> " << std::flush;
+
+			std::getline(std::cin, line);
+
+			emit line_read(QString::fromUtf8(line.data(), line.length()));
+		}
+	}
+
+signals:
+	void line_read(const QString &line);
+};
 
 class MainTask : public QObject
 {
@@ -13,6 +38,7 @@ class MainTask : public QObject
 private:
 	ProtocolHandler *m_protoHandler;
 	MessageParser   *m_messageParser;
+	ConsoleHandler  *m_consoleHandler;
 
 public:
 	MainTask(QObject *parent = 0) : QObject(parent) {}
@@ -40,7 +66,10 @@ public slots:
 
 		Connection::instance().createConnection("localhost", 8001, false);
 
-		//QTimer::singleShot(3000, this, SLOT(shutdown()));
+		m_consoleHandler = new ConsoleHandler();
+		connect(m_consoleHandler, SIGNAL(line_read(const QString&)), this, SLOT(line_read(const QString&)));
+
+		m_consoleHandler->start();
 	}
 
 	void connectionInitialized(void)
@@ -56,6 +85,11 @@ public slots:
 	void shutdown(void)
 	{
 		emit finished();
+	}
+
+	void line_read(const QString &line)
+	{
+		Connection::instance().sendData(line.toUtf8() + "\n");
 	}
 
 signals:

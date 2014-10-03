@@ -41,13 +41,13 @@ void ProtocolHandler::dataReceived(const QByteArray &data)
 void ProtocolHandler::initConnection(void)
 {
 	Connection::instance().sendData(("(12) init password=" + m_password + ",compression=" + (m_useCompression ? "on" : "off") + "\n").toUtf8());
-	Connection::instance().sendData(QString("info version\n").toUtf8());
+	Connection::instance().sendData(QString("(versioninfo) info version\n").toUtf8());
 
 	m_initRequested = true;
 }
 
 void ProtocolHandler::registerBufferUpdates(void)
 {
-	//Connection::instance().sendData("hdata buffer:gui_buffers(*) number,name\n");
+	Connection::instance().sendData("(bufferlist) hdata buffer:gui_buffers(*) number,name\n");
 	Connection::instance().sendData("sync\n");
 }

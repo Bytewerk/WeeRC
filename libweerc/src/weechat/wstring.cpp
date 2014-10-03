@@ -36,6 +36,6 @@ QString WString::repr(void) const
     if(m_null) {
         return "[" + WObject::typeToStr(m_objectType) + ":" + "NULL" + "]";
     } else {
-        return "[" + WObject::typeToStr(m_objectType) + ":" + "\"" + m_value + "\"" + "]";
+        return "[" + WObject::typeToStr(m_objectType) + ":" + "\"" + m_value.toUtf8().toPercentEncoding(" ()[]{}=!\\/*?:#$|~`+_<>&") + "\"" + "]";
     }
 }

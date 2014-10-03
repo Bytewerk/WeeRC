@@ -23,10 +23,6 @@ void Connection::createConnection(const QString &ip, quint16 port, bool tls)
         connect(sslSocket, SIGNAL(encrypted()), this, SLOT(encrypted()));
         sslSocket->connectToHostEncrypted(ip, port);
 
-        if (!sslSocket->waitForEncrypted()) {
-            qDebug() << sslSocket->errorString();
-        }
-
         m_socket = sslSocket;
     } else {
         QTcpSocket *tcpSocket = new QTcpSocket(this);
@@ -71,5 +67,6 @@ void Connection::setProtocolHandler(ProtocolHandler *handler)
 
 void Connection::sendData(const QByteArray &data)
 {
+    qDebug() << "Sending data:" << data;
     m_socket->write(data);
 }
