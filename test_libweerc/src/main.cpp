@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../../libweerc/src/weechat/whashtable.h"
+#include "../../libweerc/src/WeechatObjects/whashtable.h"
 
 #include "../../libweerc/src/connection.h"
 #include "../../libweerc/src/protocolhandler.h"
@@ -79,7 +79,17 @@ public slots:
 	}
 
 	void handleWeechatMessage(WRelayMessagePtr message) {
-		message->debugPrint();
+		switch(message->getType()) {
+			case WRelayMessage::BufferList:
+				qDebug() << "BufferList message received.";
+				message->debugPrint();
+				break;
+
+			default:
+				qDebug() << "Message of unknown type received.";
+				message->debugPrint();
+				break;
+		}
 	}
 
 	void shutdown(void)
@@ -101,16 +111,6 @@ signals:
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
-
-	QByteArray test("strint\x00\x00\x00\x03" // map str -> int; 3 elements, 10 bytes
-	                "\x00\x00\x00\x0a""0123456789""\x00\x00\xFF\xFF"             // "0123456789" -> 65535, 18 bytes
-	                "\x00\x00\x00\x05""tests""\x00\x00\x80\x80"             // "tests" -> 32768+128, 13 bytes
-	                "\x00\x00\x00\x05""blubb""\xFF\xFF\xFF\xFF",             // "blubb" -> -1, 13 bytes
-	                10+18+13+13
-			);
-
-	WHashTable ht;
-	ht.parse(test, 0);
 
 	MainTask *task = new MainTask(&a);
 	QObject::connect(task, SIGNAL(finished()), &a, SLOT(quit()));

@@ -3,7 +3,7 @@
 #ifndef MESSAGEPARSER_H
 #define MESSAGEPARSER_H
 
-#include "weechat/wrelaymessage.h"
+#include "WeechatMessages/wrelaymessage.h"
 
 #include <QObject>
 

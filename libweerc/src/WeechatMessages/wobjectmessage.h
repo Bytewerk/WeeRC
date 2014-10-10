@@ -3,7 +3,7 @@
 #ifndef WOBJECTMESSAGE_H
 #define WOBJECTMESSAGE_H
 
-#include "wobject.h"
+#include "../WeechatObjects/wobject.h"
 
 #include "wrelaymessage.h"
 

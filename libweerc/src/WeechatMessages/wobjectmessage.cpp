@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-#include "wobjectfactory.h"
+#include "../WeechatObjects/wobjectfactory.h"
 
 #include "wobjectmessage.h"
 

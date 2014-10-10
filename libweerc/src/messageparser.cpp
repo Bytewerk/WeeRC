@@ -4,8 +4,8 @@
 #include <QString>
 #include <QDebug>
 
-#include "weechat/wrelaymessagefactory.h"
-#include "weechat/wstring.h"
+#include "WeechatMessages/wrelaymessagefactory.h"
+#include "WeechatObjects/wstring.h"
 
 #include "messageparser.h"
 

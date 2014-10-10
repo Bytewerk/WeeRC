@@ -47,6 +47,11 @@ public:
     WRelayMessage(MessageType mt);
 
     /*!
+     * Get the type of the WRelayMessage.
+     */
+    virtual MessageType getType(void) { return m_type; }
+
+    /*!
      * Parse the message from the given data, beginning at start.
      *
      * \returns  The number of bytes read.

@@ -3,8 +3,8 @@
 #ifndef WBUFFERLISTMESSAGE_H
 #define WBUFFERLISTMESSAGE_H
 
-#include "whdata.h"
-#include "wpointer.h"
+#include "../WeechatObjects/whdata.h"
+#include "../WeechatObjects/wpointer.h"
 
 #include "wrelaymessage.h"
 
@@ -26,6 +26,8 @@ public:
     WBufferListMessage();
 
     virtual int parse(const QByteArray &data, int start);
+
+    virtual const BufferInfoList& getBufferInfo(void) { return m_bufferInfo; }
 
     virtual void debugPrint(void);
 };

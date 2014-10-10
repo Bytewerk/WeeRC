@@ -5,7 +5,7 @@
 
 #include "wrelaymessage.h"
 
-#include "wstring.h"
+#include "../WeechatObjects/wstring.h"
 
 class WRelayMessageFactory
 {

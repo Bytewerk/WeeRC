@@ -2,8 +2,8 @@
 
 #include <QDebug>
 
-#include "wstring.h"
-#include "winteger.h"
+#include "../WeechatObjects/wstring.h"
+#include "../WeechatObjects/winteger.h"
 
 #include "wbufferlistmessage.h"
 
