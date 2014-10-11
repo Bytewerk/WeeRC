@@ -12,9 +12,9 @@ class WBufferListMessage : public WRelayMessage
 {
 public:
     struct BufferInfo {
-        int id;
         WPointer::value_type pointer;
-        QString name;
+        int number;
+        QString full_name;
     };
 
     typedef QList<BufferInfo> BufferInfoList;

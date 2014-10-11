@@ -3,11 +3,11 @@
 
 #include <iostream>
 
-#include "../../libweerc/src/WeechatObjects/whashtable.h"
-
 #include "../../libweerc/src/connection.h"
 #include "../../libweerc/src/protocolhandler.h"
 #include "../../libweerc/src/messageparser.h"
+
+#include "../../libweerc/src/WeechatState/wstatemanager.h"
 
 class ConsoleHandler : public QThread
 {
@@ -39,6 +39,7 @@ private:
 	ProtocolHandler *m_protoHandler;
 	MessageParser   *m_messageParser;
 	ConsoleHandler  *m_consoleHandler;
+	WStateManager   *m_stateManager;
 
 public:
 	MainTask(QObject *parent = 0) : QObject(parent) {}
@@ -47,6 +48,8 @@ public:
 	{
 		delete m_messageParser;
 		delete m_protoHandler;
+		delete m_consoleHandler;
+		delete m_stateManager;
 	}
 
 public slots:
@@ -57,7 +60,6 @@ public slots:
 		m_protoHandler = new ProtocolHandler("asdf", false);
 
 		m_messageParser = new MessageParser();
-		connect(m_messageParser, SIGNAL(messageParsed(WRelayMessagePtr)), this, SLOT(handleWeechatMessage(WRelayMessagePtr)));
 		connect(m_protoHandler, SIGNAL(connectionInitialized()), this, SLOT(connectionInitialized()));
 
 		m_protoHandler->setParser(m_messageParser);
@@ -70,26 +72,15 @@ public slots:
 		connect(m_consoleHandler, SIGNAL(line_read(const QString&)), this, SLOT(line_read(const QString&)));
 
 		m_consoleHandler->start();
+
+		m_stateManager = new WStateManager();
+		connect(m_messageParser, SIGNAL(messageParsed(WRelayMessagePtr)), m_stateManager, SLOT(handleMessage(WRelayMessagePtr)));
 	}
 
 	void connectionInitialized(void)
 	{
 		qDebug() << "Connection initialized";
 		m_protoHandler->registerBufferUpdates();
-	}
-
-	void handleWeechatMessage(WRelayMessagePtr message) {
-		switch(message->getType()) {
-			case WRelayMessage::BufferList:
-				qDebug() << "BufferList message received.";
-				message->debugPrint();
-				break;
-
-			default:
-				qDebug() << "Message of unknown type received.";
-				message->debugPrint();
-				break;
-		}
 	}
 
 	void shutdown(void)

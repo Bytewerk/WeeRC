@@ -35,9 +35,9 @@ int WBufferListMessage::parse(const QByteArray &data, int start)
             QString key = hdata.getKeyTypes()[j].first;
 
             if(key == "number") {
-                bi.id = dynamic_cast<const WInteger*>(obj.get())->getValue();
-            } else if(key == "name") {
-                bi.name = dynamic_cast<const WString*>(obj.get())->getValue();
+                bi.number = dynamic_cast<const WInteger*>(obj.get())->getValue();
+            } else if(key == "full_name") {
+                bi.full_name = dynamic_cast<const WString*>(obj.get())->getValue();
             } else {
                 qDebug() << "Unexpected key" << key;
             }
@@ -54,6 +54,6 @@ void WBufferListMessage::debugPrint(void)
     qDebug() << "Contents of WBufferListMessage";
 
     for(const BufferInfo &bi: m_bufferInfo) {
-        qDebug() << "  - " << bi.id << bi.pointer << bi.name;
+        qDebug() << "  - " << bi.number << bi.pointer << bi.full_name;
     }
 }

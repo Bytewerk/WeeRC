@@ -48,6 +48,6 @@ void ProtocolHandler::initConnection(void)
 
 void ProtocolHandler::registerBufferUpdates(void)
 {
-	Connection::instance().sendData("(bufferlist) hdata buffer:gui_buffers(*) number,name\n");
+	Connection::instance().sendData("(bufferlist) hdata buffer:gui_buffers(*) number,full_name\n");
 	Connection::instance().sendData("sync\n");
 }
