@@ -21,6 +21,12 @@ bool WStateManager::handleMessage(WRelayMessagePtr message)
 			m_bufferState->processBufferListMessage(dynamic_cast<WBufferListMessage*>(message.get()));
 			return true;
 
+		case WRelayMessage::BufferOpened:
+			qDebug() << "BufferOpened message received.";
+			//m_bufferState->processBufferListMessage(dynamic_cast<WBufferListMessage*>(message.get()));
+			message->debugPrint();
+			return true;
+
 		default:
 			qDebug() << "Message of unknown type received.";
 			message->debugPrint();

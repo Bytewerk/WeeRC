@@ -2,6 +2,7 @@
 
 #include "wobjectmessage.h"
 #include "wbufferlistmessage.h"
+#include "wbufferopenedmessage.h"
 
 #include "wrelaymessagefactory.h"
 
@@ -15,9 +16,11 @@ WRelayMessagePtr WRelayMessageFactory::fromMessageID(const WString &wstr)
 
     QString str = wstr.getValue();
 
+    // weechat default messages
+    if     (str == QString("_buffer_opened")) { return WRelayMessagePtr(new WBufferOpenedMessage()); }
     // specific messages
-    if     (str == QString("bufferlist")) { return WRelayMessagePtr(new WBufferListMessage()); }
+    else if(str == QString("bufferlist"))     { return WRelayMessagePtr(new WBufferListMessage()); }
     // also use WObjectMessage for unknown IDs
-    else                                  { return WRelayMessagePtr(new WObjectMessage()); }
+    else                                      { return WRelayMessagePtr(new WObjectMessage()); }
 }
 
