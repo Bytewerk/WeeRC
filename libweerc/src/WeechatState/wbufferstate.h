@@ -4,16 +4,12 @@
 #include <QMap>
 
 #include "../WeechatMessages/wbufferlistmessage.h"
+#include "../WeechatMessages/wbufferopenedmessage.h"
 
 class WBufferState
 {
 	public:
-		struct BufferInfo {
-			QString full_name;
-			int     number;
-		};
-
-		typedef QMap<WPointer::value_type, BufferInfo> BufferInfoMap;
+		typedef QMap<WPointer::value_type, WChatBufferPtr> BufferInfoMap;
 
 	private:
 		BufferInfoMap m_bufferInfoMap;
@@ -22,6 +18,7 @@ class WBufferState
 		explicit WBufferState(void);
 
 		void processBufferListMessage(WBufferListMessage *message);
+		void processBufferOpenedMessage(WBufferOpenedMessage *message);
 };
 
 #endif // WBUFFERSTATE_H

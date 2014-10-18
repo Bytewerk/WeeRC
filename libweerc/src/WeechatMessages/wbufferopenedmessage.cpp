@@ -2,9 +2,6 @@
 
 #include <QDebug>
 
-#include "../WeechatObjects/wstring.h"
-#include "../WeechatObjects/winteger.h"
-
 #include "wbufferopenedmessage.h"
 
 WBufferOpenedMessage::WBufferOpenedMessage()
@@ -26,20 +23,7 @@ int WBufferOpenedMessage::parse(const QByteArray &data, int start)
     if(hdata.getItems().size() >= 1) {
         const WHdata::HdataItem &item = hdata.getItems()[0];
 
-        m_bufferPointer = dynamic_cast<const WPointer*>(item.ppath[0].get())->getValue();
-
-        for(int j = 0; j < item.entries.size(); j++) {
-            WObjectPtr obj = item.entries[j];
-            QString key = hdata.getKeyTypes()[j].first;
-
-            if(key == "number") {
-                m_bufferNumber = dynamic_cast<const WInteger*>(obj.get())->getValue();
-            } else if(key == "full_name") {
-                m_bufferFullName = dynamic_cast<const WString*>(obj.get())->getValue();
-            } else {
-                qDebug() << "Unhandled key" << key;
-            }
-        }
+        m_buffer.fillFromHdataItem(hdata, item);
     }
 
     return dataRead;
@@ -47,8 +31,6 @@ int WBufferOpenedMessage::parse(const QByteArray &data, int start)
 
 void WBufferOpenedMessage::debugPrint(void)
 {
-    qDebug() << "Contents of WBufferOpenedMessage";
-    qDebug() << "  pointer:  " << m_bufferPointer;
-    qDebug() << "  full_name:" << m_bufferFullName;
-    qDebug() << "  number:   " << m_bufferNumber;
+    qDebug() << "Contents of WChatBufferOpenedMessage";
+    m_buffer.debugPrint();
 }

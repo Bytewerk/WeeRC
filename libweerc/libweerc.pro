@@ -30,6 +30,7 @@ HEADERS += ./src/WeechatMessages/wrelaymessage.h
 HEADERS += ./src/WeechatMessages/wbufferlistmessage.h
 HEADERS += ./src/WeechatMessages/wbufferopenedmessage.h
 HEADERS += ./src/WeechatMessages/wobjectmessage.h
+HEADERS += ./src/WeechatModels/wchatbuffer.h
 HEADERS += ./src/WeechatState/wstatemanager.h
 HEADERS += ./src/WeechatState/wbufferstate.h
 
@@ -55,5 +56,6 @@ SOURCES += ./src/WeechatMessages/wrelaymessagefactory.cpp
 SOURCES += ./src/WeechatMessages/wbufferlistmessage.cpp
 SOURCES += ./src/WeechatMessages/wbufferopenedmessage.cpp
 SOURCES += ./src/WeechatMessages/wobjectmessage.cpp
+SOURCES += ./src/WeechatModels/wchatbuffer.cpp
 SOURCES += ./src/WeechatState/wstatemanager.cpp
 SOURCES += ./src/WeechatState/wbufferstate.cpp

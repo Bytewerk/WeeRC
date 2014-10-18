@@ -3,22 +3,21 @@
 #ifndef WBUFFEROPENEDMESSAGE_H
 #define WBUFFEROPENEDMESSAGE_H
 
-#include "../WeechatObjects/whdata.h"
-#include "../WeechatObjects/wpointer.h"
+#include "../WeechatModels/wchatbuffer.h"
 
 #include "wrelaymessage.h"
 
 class WBufferOpenedMessage : public WRelayMessage
 {
 private:
-    WPointer::value_type m_bufferPointer;
-    int                  m_bufferNumber;
-    QString              m_bufferFullName;
+    WChatBuffer m_buffer;
 
 public:
     WBufferOpenedMessage();
 
     virtual int parse(const QByteArray &data, int start);
+
+    virtual const WChatBuffer& getBuffer(void) const { return m_buffer; }
 
     virtual void debugPrint(void);
 };

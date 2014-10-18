@@ -23,7 +23,7 @@ bool WStateManager::handleMessage(WRelayMessagePtr message)
 
 		case WRelayMessage::BufferOpened:
 			qDebug() << "BufferOpened message received.";
-			//m_bufferState->processBufferListMessage(dynamic_cast<WBufferListMessage*>(message.get()));
+			m_bufferState->processBufferOpenedMessage(dynamic_cast<WBufferOpenedMessage*>(message.get()));
 			message->debugPrint();
 			return true;
 

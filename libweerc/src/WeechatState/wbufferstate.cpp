@@ -12,13 +12,22 @@ void WBufferState::processBufferListMessage(WBufferListMessage *message)
 
 	m_bufferInfoMap.clear();
 
-	for(const WBufferListMessage::BufferInfo& bi: message->getBufferInfo()) {
-		qDebug() << "Adding" << bi.pointer << "(#" << bi.number << ":" << bi.full_name << ")";
+	for(const WChatBufferPtr& buffer: message->getBufferInfo()) {
+		qDebug() << "Adding" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
 
-		WBufferState::BufferInfo newEntry;
-		newEntry.number = bi.number;
-		newEntry.full_name = bi.full_name;
-
-		m_bufferInfoMap.insert(bi.pointer, newEntry);
+		m_bufferInfoMap.insert(buffer->pointer, buffer);
 	}
+}
+
+void WBufferState::processBufferOpenedMessage(WBufferOpenedMessage *message)
+{
+	qDebug() << "Adding buffer from WBufferOpenedMessage";
+
+	WChatBufferPtr buffer(new WChatBuffer());
+	const WChatBuffer &buf = message->getBuffer();
+	buffer->copyFrom(buf);
+
+	qDebug() << "Adding" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
+
+	m_bufferInfoMap.insert(buffer->pointer, buffer);
 }

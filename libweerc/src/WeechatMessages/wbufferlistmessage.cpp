@@ -26,24 +26,11 @@ int WBufferListMessage::parse(const QByteArray &data, int start)
     for(int i = 0; i < hdata.getItems().size(); i++) {
         const WHdata::HdataItem &item = hdata.getItems()[i];
 
-        BufferInfo bi;
+        WChatBufferPtr buffer(new WChatBuffer());
 
-        bi.pointer = dynamic_cast<const WPointer*>(item.ppath[0].get())->getValue();
+        buffer->fillFromHdataItem(hdata, item);
 
-        for(int j = 0; j < item.entries.size(); j++) {
-            WObjectPtr obj = item.entries[j];
-            QString key = hdata.getKeyTypes()[j].first;
-
-            if(key == "number") {
-                bi.number = dynamic_cast<const WInteger*>(obj.get())->getValue();
-            } else if(key == "full_name") {
-                bi.full_name = dynamic_cast<const WString*>(obj.get())->getValue();
-            } else {
-                qDebug() << "Unexpected key" << key;
-            }
-        }
-
-        m_bufferInfo.append(bi);
+        m_bufferInfo.append(buffer);
     }
 
     return dataRead;
@@ -53,7 +40,7 @@ void WBufferListMessage::debugPrint(void)
 {
     qDebug() << "Contents of WBufferListMessage";
 
-    for(const BufferInfo &bi: m_bufferInfo) {
-        qDebug() << "  - " << bi.number << bi.pointer << bi.full_name;
+    for(const WChatBufferPtr &buffer: m_bufferInfo) {
+        buffer->debugPrint();
     }
 }

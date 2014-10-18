@@ -3,21 +3,14 @@
 #ifndef WBUFFERLISTMESSAGE_H
 #define WBUFFERLISTMESSAGE_H
 
-#include "../WeechatObjects/whdata.h"
-#include "../WeechatObjects/wpointer.h"
+#include "../WeechatModels/wchatbuffer.h"
 
 #include "wrelaymessage.h"
 
 class WBufferListMessage : public WRelayMessage
 {
 public:
-    struct BufferInfo {
-        WPointer::value_type pointer;
-        int number;
-        QString full_name;
-    };
-
-    typedef QList<BufferInfo> BufferInfoList;
+    typedef QList<WChatBufferPtr> BufferInfoList;
 
 private:
     BufferInfoList m_bufferInfo;
