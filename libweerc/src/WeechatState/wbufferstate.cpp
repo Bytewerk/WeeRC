@@ -21,13 +21,26 @@ void WBufferState::processBufferListMessage(WBufferListMessage *message)
 
 void WBufferState::processBufferOpenedMessage(WBufferOpenedMessage *message)
 {
-	qDebug() << "Adding buffer from WBufferOpenedMessage";
+	WChatBufferPtr buffer(new WChatBuffer(message->getBuffer()));
 
-	WChatBufferPtr buffer(new WChatBuffer());
-	const WChatBuffer &buf = message->getBuffer();
-	buffer->copyFrom(buf);
-
-	qDebug() << "Adding" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
+	qDebug() << "Adding to buffer list:" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
 
 	m_bufferInfoMap.insert(buffer->pointer, buffer);
+}
+
+void WBufferState::processBufferClosingMessage(WBufferClosingMessage *message)
+{
+	WChatBufferPtr buffer(new WChatBuffer(message->getBuffer()));
+
+	qDebug() << "Deleting from buffer list:" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
+
+	m_bufferInfoMap.remove(buffer->pointer);
+}
+
+void WBufferState::debugPrint(void)
+{
+	qDebug() << "Contents of WBufferState";
+	for(const WChatBufferPtr &bufPtr: m_bufferInfoMap) {
+		bufPtr->debugPrint();
+	}
 }

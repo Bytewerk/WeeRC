@@ -12,6 +12,7 @@ class WRelayMessage
 public:
     enum MessageType {
         BufferOpened,
+        BufferClosing,
         BufferMoved,
         BufferMerged,
         BufferUnmerged,

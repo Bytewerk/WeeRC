@@ -5,6 +5,7 @@
 
 #include "../WeechatMessages/wbufferlistmessage.h"
 #include "../WeechatMessages/wbufferopenedmessage.h"
+#include "../WeechatMessages/wbufferclosingmessage.h"
 
 class WBufferState
 {
@@ -19,6 +20,9 @@ class WBufferState
 
 		void processBufferListMessage(WBufferListMessage *message);
 		void processBufferOpenedMessage(WBufferOpenedMessage *message);
+		void processBufferClosingMessage(WBufferClosingMessage *message);
+
+		void debugPrint(void);
 };
 
 #endif // WBUFFERSTATE_H
