@@ -18,6 +18,6 @@ QString WChar::repr(void) const
     if(m_value.isPrint()) {
         return "[" + WObject::typeToStr(m_objectType) + ":" + m_value + "]";
     } else {
-        return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value.digitValue()) + "]";
+        return "[" + WObject::typeToStr(m_objectType) + ":" + QString::number(m_value.unicode()) + "]";
     }
 }
