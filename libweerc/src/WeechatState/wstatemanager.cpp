@@ -31,6 +31,11 @@ bool WStateManager::handleMessage(WRelayMessagePtr message)
 			m_bufferState->processBufferClosingMessage(dynamic_cast<WBufferClosingMessage*>(message.get()));
 			break;
 
+		case WRelayMessage::BufferLineAdded:
+			qDebug() << "BufferLineAdded message received.";
+			message->debugPrint();
+			break;
+
 		default:
 			qDebug() << "Message of unknown type received.";
 			message->debugPrint();

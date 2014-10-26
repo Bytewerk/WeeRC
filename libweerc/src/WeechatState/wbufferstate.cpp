@@ -37,6 +37,11 @@ void WBufferState::processBufferClosingMessage(WBufferClosingMessage *message)
 	m_bufferInfoMap.remove(buffer->pointer);
 }
 
+void WBufferState::processBufferLineAddedMessage(WBufferLineAddedMessage *message)
+{
+	// TODO
+}
+
 void WBufferState::debugPrint(void)
 {
 	qDebug() << "Contents of WBufferState";
