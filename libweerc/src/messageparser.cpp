@@ -19,6 +19,11 @@ MessageParser::~MessageParser()
 
 int MessageParser::parse(const QByteArray &data, int start)
 {
+    // check array length
+    if(data.length() < start + 4) {
+        return -1;
+    }
+
     qint32 len_be = 0;
 
     // extract the data
@@ -28,7 +33,7 @@ int MessageParser::parse(const QByteArray &data, int start)
 
     qint32 msglen = qFromBigEndian(len_be);
 
-    // check array length
+    // check array length again
     if(data.length() < start + msglen) {
         return -1;
     }

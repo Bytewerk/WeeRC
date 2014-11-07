@@ -30,12 +30,16 @@ void ProtocolHandler::dataReceived(const QByteArray &data)
 	// add new data to data buffer
 	m_dataBuffer += data;
 
-	int dataRead = m_parser->parse(m_dataBuffer, m_offset);
+	int dataRead;
 
-	// TODO: drop already parsed data from the buffer
-	if(dataRead > 0) {
-		m_offset += dataRead;
-	}
+	do {
+		dataRead = m_parser->parse(m_dataBuffer, m_offset);
+
+		// TODO: drop already parsed data from the buffer
+		if(dataRead > 0) {
+			m_offset += dataRead;
+		}
+	} while(dataRead != -1);
 }
 
 void ProtocolHandler::initConnection(void)
