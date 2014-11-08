@@ -36,6 +36,7 @@ HEADERS += ./src/WeechatModels/wchatbuffer.h
 HEADERS += ./src/WeechatModels/wbufferline.h
 HEADERS += ./src/WeechatState/wstatemanager.h
 HEADERS += ./src/WeechatState/wbufferstate.h
+HEADERS += ./src/WeechatState/wbufferinfo.h
 
 SOURCES += ./src/protocolhandler.cpp
 SOURCES += ./src/connection.cpp
@@ -65,3 +66,4 @@ SOURCES += ./src/WeechatModels/wchatbuffer.cpp
 SOURCES += ./src/WeechatModels/wbufferline.cpp
 SOURCES += ./src/WeechatState/wstatemanager.cpp
 SOURCES += ./src/WeechatState/wbufferstate.cpp
+SOURCES += ./src/WeechatState/wbufferinfo.cpp

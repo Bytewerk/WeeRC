@@ -8,10 +8,12 @@
 #include "../WeechatMessages/wbufferclosingmessage.h"
 #include "../WeechatMessages/wbufferlineaddedmessage.h"
 
+#include "wbufferinfo.h"
+
 class WBufferState
 {
 	public:
-		typedef QMap<WPointer::value_type, WChatBufferPtr> BufferInfoMap;
+		typedef QMap<WPointer::value_type, WBufferInfoPtr> BufferInfoMap;
 
 	private:
 		BufferInfoMap m_bufferInfoMap;

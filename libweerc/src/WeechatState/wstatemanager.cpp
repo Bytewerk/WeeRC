@@ -33,7 +33,7 @@ bool WStateManager::handleMessage(WRelayMessagePtr message)
 
 		case WRelayMessage::BufferLineAdded:
 			qDebug() << "BufferLineAdded message received.";
-			message->debugPrint();
+			m_bufferState->processBufferLineAddedMessage(dynamic_cast<WBufferLineAddedMessage*>(message.get()));
 			break;
 
 		default:
