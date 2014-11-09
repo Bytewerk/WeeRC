@@ -12,12 +12,14 @@ LIBS = ../libweerc/libweerc.a
 QMAKE_CXXFLAGS += -std=c++0x -O0
 QMAKE_LFLAGS += -std=c++0x -O0
 
-QT -= gui
+QT += gui
 QT += network
-CONFIG += console debug
+CONFIG += debug
 
 # Input
-SOURCES += src/main.cpp
+SOURCES += src/main.cpp src/mainwindow.cpp
+HEADERS += src/mainwindow.h
+FORMS += ui/mainwindow.ui
 
 # libweerc
 lwrc.target = ../libweerc/libweerc.a

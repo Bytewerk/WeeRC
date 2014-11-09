@@ -1,4 +1,4 @@
-#include <QtCore>
+#include <QtGui>
 #include <QThread>
 
 #include <iostream>
@@ -9,22 +9,51 @@
 
 #include "../../libweerc/src/WeechatState/wstatemanager.h"
 
+#include "mainwindow.h"
+
 class ConsoleHandler : public QThread
 {
 	Q_OBJECT
+
+private:
+	bool m_running;
 
 public:
 	void run(void)
 	{
 		std::string line;
 
-		while(true) {
-			std::cout << "> " << std::flush;
+		m_running = true;
 
-			std::getline(std::cin, line);
+		fd_set set;
+		struct timeval tv;
 
-			emit line_read(QString::fromUtf8(line.data(), line.length()));
+		bool showprompt = true;
+
+		while(m_running) {
+			// FIXME!
+			FD_ZERO(&set);
+			FD_SET(0, &set);
+
+			tv.tv_sec = 1;
+			tv.tv_usec = 0;
+
+			if(showprompt) {
+				std::cout << "> " << std::flush;
+				showprompt = false;
+			}
+
+			if(select(1, &set, NULL, NULL, &tv)) {
+				std::getline(std::cin, line);
+				emit line_read(QString::fromUtf8(line.data(), line.length()));
+				showprompt = true;
+			}
 		}
+	}
+
+	void stop(void)
+	{
+		m_running = false;
 	}
 
 signals:
@@ -85,6 +114,8 @@ public slots:
 
 	void shutdown(void)
 	{
+		m_consoleHandler->stop();
+		m_consoleHandler->wait();
 		emit finished();
 	}
 
@@ -101,11 +132,16 @@ signals:
 
 int main(int argc, char *argv[])
 {
-	QCoreApplication a(argc, argv);
+	QApplication a(argc, argv);
 
 	MainTask *task = new MainTask(&a);
 	QObject::connect(task, SIGNAL(finished()), &a, SLOT(quit()));
 	QTimer::singleShot(0, task, SLOT(run()));
+
+	MainWindow mainWindow;
+	mainWindow.show();
+
+	QObject::connect(&a, SIGNAL(lastWindowClosed()), task, SLOT(shutdown()));
 
 	return a.exec();
 }
