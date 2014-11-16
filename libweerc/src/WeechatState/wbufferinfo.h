@@ -25,8 +25,8 @@ class WBufferInfo
 		void appendLine(WBufferLinePtr line);
 
 		const WChatBufferPtr  getBufferPointer(void) const { return m_chatBuffer; }
-		const BufferLineList& getLinePointerList(void) const { return m_bufferLineOrder; }
-		const WBufferLinePtr  getLinePointer(WPointer::value_type ptr) const { return m_bufferLines[ptr]; }
+		const WBufferLinePtr  getLine(WPointer::value_type linePtr) const;
+		const BufferLineList& getLineOrder(void) const { return m_bufferLineOrder; }
 
 		void debugPrint(void) const;
 };

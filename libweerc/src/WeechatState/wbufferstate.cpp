@@ -58,6 +58,13 @@ void WBufferState::processBufferLineAddedMessage(WBufferLineAddedMessage *messag
 	emit bufferLinesUpdated(bufferInfo);
 }
 
+const WBufferInfoPtr WBufferState::getBufferInfo(WPointer::value_type bufPtr) const
+{
+	Q_ASSERT(m_bufferInfoMap.contains(bufPtr));
+
+	return m_bufferInfoMap[bufPtr];
+}
+
 void WBufferState::debugPrint(void) const
 {
 	qDebug() << "Contents of WBufferState";

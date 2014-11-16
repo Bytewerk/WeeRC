@@ -9,6 +9,7 @@
 #include "../../libweerc/src/WeechatState/wstatemanager.h"
 
 class BufferListModel;
+class BufferLinesModel;
 
 class MainWindow : public QMainWindow
 {
@@ -17,10 +18,11 @@ class MainWindow : public QMainWindow
 	private:
 		Ui::MainWindow ui;
 
-		ProtocolHandler *m_protoHandler;
-		MessageParser   *m_messageParser;
-		WStateManager   *m_stateManager;
-		BufferListModel *m_bufferListModel;
+		ProtocolHandler  *m_protoHandler;
+		MessageParser    *m_messageParser;
+		WStateManager    *m_stateManager;
+		BufferListModel  *m_bufferListModel;
+		BufferLinesModel *m_bufferLinesModel;
 
 	private slots:
 		void weechatConnectionInitialized(void);

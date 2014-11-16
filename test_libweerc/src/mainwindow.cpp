@@ -1,67 +1,7 @@
+#include "bufferlistmodel.h"
+#include "bufferlinesmodel.h"
+
 #include "mainwindow.h"
-
-// TODO: move this out of this file
-class BufferListModel : public QAbstractListModel
-{
-	Q_OBJECT
-	
-	private:
-		WStateManager *m_stateManager;
-
-	public:
-		BufferListModel(WStateManager *stateManager, QObject *parent = 0)
-			: QAbstractListModel(parent), m_stateManager(stateManager)
-		{
-			connect(m_stateManager, SIGNAL(bufferListUpdated(const WBufferState::BufferInfoMap&)),
-			        this, SLOT(bufferListUpdated(const WBufferState::BufferInfoMap&)));
-		}
-
-		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const
-		{
-			if(!index.isValid()) {
-				return QVariant();
-			}
-
-			if(role == Qt::DisplayRole) {
-				WBufferState::BufferInfoMap::const_iterator iter =
-					m_stateManager->getBufferState()->getBufferInfoMap().begin();
-
-				QString bufferName = (iter + index.row())->get()->getBufferPointer()->fullName;
-
-				qDebug() << "Entry" << index.row() << "resolves to" << bufferName;
-
-				return bufferName;
-			} else {
-				return QVariant();
-			}
-		}
-
-		int rowCount(const QModelIndex &parent) const
-		{
-			int count = m_stateManager->getBufferState()->getBufferInfoMap().size();
-			qDebug() << "Model has" << count << "entries";
-			return count;
-		}
-
-		QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
-		{
-			if(role == Qt::DisplayRole) {
-				return QString("Buffer Name");
-			} else {
-				return QVariant();
-			}
-		}
-
-	private slots:
-		void bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfoMap)
-		{
-			QModelIndex topLeft = createIndex(0, 0);
-			QModelIndex bottomRight = createIndex(bufferInfoMap.size(), 0);
-			emit dataChanged(topLeft, bottomRight);
-		}
-};
-
-#include "mainwindow.moc"
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -92,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 	m_bufferListModel = new BufferListModel(m_stateManager, this);
 	ui.bufferListView->setModel(m_bufferListModel);
+
+	m_bufferLinesModel = new BufferLinesModel(m_stateManager, this);
+	ui.messageView->setModel(m_bufferLinesModel);
 }
 
 MainWindow::~MainWindow()
@@ -124,6 +67,13 @@ void MainWindow::bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfo
 
 void MainWindow::bufferLinesUpdated(const WBufferInfoPtr &bufferInfo)
 {
+	static bool first = true;
+
+	if(first) {
+		m_bufferLinesModel->setAssociatedBuffer(bufferInfo->getBufferPointer()->pointer);
+		first = false;
+	}
+
 	qDebug() << "\e[1;31mBuffer lines updated.\e[0m";
 }
 

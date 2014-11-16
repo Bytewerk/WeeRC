@@ -15,6 +15,13 @@ void WBufferInfo::appendLine(WBufferLinePtr line)
 	m_bufferLineOrder.append(ptrval);
 }
 
+const WBufferLinePtr WBufferInfo::getLine(WPointer::value_type linePtr) const
+{
+	Q_ASSERT(m_bufferLines.contains(linePtr));
+
+	return m_bufferLines[linePtr];
+}
+
 void WBufferInfo::debugPrint(void) const
 {
 	qDebug() << "This WBufferinfo contains information about the following buffer:";

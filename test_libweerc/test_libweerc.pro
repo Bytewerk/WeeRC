@@ -17,8 +17,8 @@ QT += network
 CONFIG += debug
 
 # Input
-SOURCES += src/main.cpp src/mainwindow.cpp
-HEADERS += src/mainwindow.h
+SOURCES += src/main.cpp src/mainwindow.cpp src/bufferlistmodel.cpp src/bufferlinesmodel.cpp
+HEADERS += src/mainwindow.h src/bufferlistmodel.h src/bufferlinesmodel.h
 FORMS += ui/mainwindow.ui
 
 # libweerc

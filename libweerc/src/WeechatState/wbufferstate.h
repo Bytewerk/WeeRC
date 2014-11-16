@@ -29,6 +29,7 @@ class WBufferState : public QObject
 		void processBufferLineAddedMessage(WBufferLineAddedMessage *message);
 
 		const BufferInfoMap& getBufferInfoMap(void) const { return m_bufferInfoMap; }
+		const WBufferInfoPtr getBufferInfo(WPointer::value_type bufPtr) const;
 
 		void debugPrint(void) const;
 
