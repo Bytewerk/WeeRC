@@ -10,8 +10,10 @@
 
 #include "wbufferinfo.h"
 
-class WBufferState
+class WBufferState : public QObject
 {
+	Q_OBJECT
+
 	public:
 		typedef QMap<WPointer::value_type, WBufferInfoPtr> BufferInfoMap;
 
@@ -19,14 +21,20 @@ class WBufferState
 		BufferInfoMap m_bufferInfoMap;
 
 	public:
-		explicit WBufferState(void);
+		explicit WBufferState(QObject *parent = 0);
 
 		void processBufferListMessage(WBufferListMessage *message);
 		void processBufferOpenedMessage(WBufferOpenedMessage *message);
 		void processBufferClosingMessage(WBufferClosingMessage *message);
 		void processBufferLineAddedMessage(WBufferLineAddedMessage *message);
 
-		void debugPrint(void);
+		const BufferInfoMap& getBufferInfoMap(void) const { return m_bufferInfoMap; }
+
+		void debugPrint(void) const;
+
+	signals:
+		void bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfoMap);
+		void bufferLinesUpdated(const WBufferInfoPtr &bufferInfo);
 };
 
 #endif // WBUFFERSTATE_H

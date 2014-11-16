@@ -3,15 +3,9 @@
 
 #include <iostream>
 
-#include "../../libweerc/src/connection.h"
-#include "../../libweerc/src/protocolhandler.h"
-#include "../../libweerc/src/messageparser.h"
-
-#include "../../libweerc/src/WeechatState/wstatemanager.h"
-
 #include "mainwindow.h"
 
-class ConsoleHandler : public QThread
+/*class ConsoleHandler : public QThread
 {
 	Q_OBJECT
 
@@ -126,22 +120,22 @@ public slots:
 
 signals:
 	void finished();
-};
+};*/
 
-#include "main.moc"
+//#include "main.moc"
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	MainTask *task = new MainTask(&a);
+	/*MainTask *task = new MainTask(&a);
 	QObject::connect(task, SIGNAL(finished()), &a, SLOT(quit()));
-	QTimer::singleShot(0, task, SLOT(run()));
+	QTimer::singleShot(0, task, SLOT(run()));*/
 
 	MainWindow mainWindow;
 	mainWindow.show();
 
-	QObject::connect(&a, SIGNAL(lastWindowClosed()), task, SLOT(shutdown()));
+	//QObject::connect(&a, SIGNAL(lastWindowClosed()), task, SLOT(shutdown()));
 
 	return a.exec();
 }

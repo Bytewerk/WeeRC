@@ -15,7 +15,7 @@ void WBufferInfo::appendLine(WBufferLinePtr line)
 	m_bufferLineOrder.append(ptrval);
 }
 
-void WBufferInfo::debugPrint(void)
+void WBufferInfo::debugPrint(void) const
 {
 	qDebug() << "This WBufferinfo contains information about the following buffer:";
 	m_chatBuffer->debugPrint();

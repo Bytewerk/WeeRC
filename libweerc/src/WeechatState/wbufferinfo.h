@@ -24,11 +24,11 @@ class WBufferInfo
 
 		void appendLine(WBufferLinePtr line);
 
-		const WChatBufferPtr  getBufferPointer(void) { return m_chatBuffer; }
-		const BufferLineList& getLinePointerList(void) { return m_bufferLineOrder; }
-		const WBufferLinePtr  getLinePointer(WPointer::value_type ptr) { return m_bufferLines[ptr]; }
+		const WChatBufferPtr  getBufferPointer(void) const { return m_chatBuffer; }
+		const BufferLineList& getLinePointerList(void) const { return m_bufferLineOrder; }
+		const WBufferLinePtr  getLinePointer(WPointer::value_type ptr) const { return m_bufferLines[ptr]; }
 
-		void debugPrint(void);
+		void debugPrint(void) const;
 };
 
 typedef std::shared_ptr<WBufferInfo> WBufferInfoPtr;

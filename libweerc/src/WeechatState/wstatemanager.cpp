@@ -6,6 +6,12 @@ WStateManager::WStateManager(QObject *parent)
 	: QObject(parent)
 {
 	m_bufferState = new WBufferState();
+
+	// pass-through signals
+	connect(m_bufferState, SIGNAL(bufferListUpdated(const WBufferState::BufferInfoMap&)),
+	        this, SIGNAL(bufferListUpdated(const WBufferState::BufferInfoMap&)));
+	connect(m_bufferState, SIGNAL(bufferLinesUpdated(const WBufferInfoPtr&)),
+	        this, SIGNAL(bufferLinesUpdated(const WBufferInfoPtr&)));
 }
 
 WStateManager::~WStateManager()

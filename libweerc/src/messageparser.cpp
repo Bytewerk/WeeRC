@@ -41,7 +41,8 @@ int MessageParser::parse(const QByteArray &data, int start)
     // calculate start of next field
     start += 4;
 
-    bool compression = data[start];
+    //TODO
+    //bool compression = data[start];
 
     start += 1;
 

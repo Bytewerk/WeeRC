@@ -20,6 +20,12 @@ class WStateManager : public QObject
 
 	public slots:
 		bool handleMessage(WRelayMessagePtr message);
+
+		const WBufferState* getBufferState(void) { return m_bufferState; }
+
+	signals:
+		void bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfoMap);
+		void bufferLinesUpdated(const WBufferInfoPtr &bufferInfo);
 };
 
 #endif // WSTATEMANAGER_H

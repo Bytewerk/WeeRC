@@ -2,7 +2,8 @@
 
 #include "wbufferstate.h"
 
-WBufferState::WBufferState(void)
+WBufferState::WBufferState(QObject *parent)
+	: QObject(parent)
 {
 }
 
@@ -18,6 +19,8 @@ void WBufferState::processBufferListMessage(WBufferListMessage *message)
 		WBufferInfoPtr bufferInfo(new WBufferInfo(buffer));
 		m_bufferInfoMap.insert(buffer->pointer, bufferInfo);
 	}
+
+	emit bufferListUpdated(m_bufferInfoMap);
 }
 
 void WBufferState::processBufferOpenedMessage(WBufferOpenedMessage *message)
@@ -28,6 +31,8 @@ void WBufferState::processBufferOpenedMessage(WBufferOpenedMessage *message)
 	qDebug() << "Adding to buffer list:" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
 
 	m_bufferInfoMap.insert(buffer->pointer, bufferInfo);
+
+	emit bufferListUpdated(m_bufferInfoMap);
 }
 
 void WBufferState::processBufferClosingMessage(WBufferClosingMessage *message)
@@ -37,6 +42,8 @@ void WBufferState::processBufferClosingMessage(WBufferClosingMessage *message)
 	qDebug() << "Deleting from buffer list:" << buffer->pointer << "(#" << buffer->number << ":" << buffer->fullName << ")";
 
 	m_bufferInfoMap.remove(buffer->pointer);
+
+	emit bufferListUpdated(m_bufferInfoMap);
 }
 
 void WBufferState::processBufferLineAddedMessage(WBufferLineAddedMessage *message)
@@ -47,9 +54,11 @@ void WBufferState::processBufferLineAddedMessage(WBufferLineAddedMessage *messag
 	qDebug() << "Adding line " << line->message << "to buffer" << bufferInfo->getBufferPointer()->fullName;
 
 	bufferInfo->appendLine(line);
+
+	emit bufferLinesUpdated(bufferInfo);
 }
 
-void WBufferState::debugPrint(void)
+void WBufferState::debugPrint(void) const
 {
 	qDebug() << "Contents of WBufferState";
 	for(const WBufferInfoPtr &bufInfo: m_bufferInfoMap) {
