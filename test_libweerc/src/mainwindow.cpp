@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 	m_bufferListModel = new BufferListModel(m_stateManager, this);
 	ui.bufferListView->setModel(m_bufferListModel);
 
-	bool x = connect(ui.bufferListView->selectionModel(), SIGNAL(currentChanged(const QModelIndex&, const QModelIndex&)),
+	connect(ui.bufferListView->selectionModel(), SIGNAL(currentChanged(const QModelIndex&, const QModelIndex&)),
 				this, SLOT(bufferListSelectionUpdated(const QModelIndex&, const QModelIndex&)));
 
 	m_bufferLinesModel = new BufferLinesModel(m_stateManager, this);
@@ -56,7 +56,8 @@ void MainWindow::weechatConnectionInitialized(void)
 
 void MainWindow::sendWeechatCommand(void)
 {
-	Connection::instance().sendData(ui.inputEdit->text().toUtf8() + "\n");
+	const QString &bufName = m_bufferLinesModel->getAssociatedBufferInfo()->getBufferPointer()->fullName;
+	Connection::instance().sendData(("input " + bufName + " " + ui.inputEdit->text()).toUtf8() + "\n");
 	ui.inputEdit->setText("");
 	ui.inputEdit->setFocus();
 }

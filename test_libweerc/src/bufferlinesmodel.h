@@ -23,6 +23,8 @@ class BufferLinesModel : public QAbstractTableModel
 
 		void setAssociatedBuffer(WPointer::value_type bufPtr);
 
+		WBufferInfoPtr getAssociatedBufferInfo(void) { return m_bufferInfo; };
+
 	private slots:
 		void bufferLinesUpdated(const WBufferInfoPtr &bufferInfo);
 };
