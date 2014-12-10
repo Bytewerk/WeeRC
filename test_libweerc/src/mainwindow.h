@@ -31,6 +31,8 @@ class MainWindow : public QMainWindow
 		void bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfoMap);
 		void bufferLinesUpdated(const WBufferInfoPtr &bufferInfo);
 
+		void bufferListSelectionUpdated(const QModelIndex &current, const QModelIndex &previous);
+
 	public:
 		MainWindow(QWidget *parent = 0);
 		~MainWindow();

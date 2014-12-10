@@ -33,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
 	m_bufferListModel = new BufferListModel(m_stateManager, this);
 	ui.bufferListView->setModel(m_bufferListModel);
 
+	bool x = connect(ui.bufferListView->selectionModel(), SIGNAL(currentChanged(const QModelIndex&, const QModelIndex&)),
+				this, SLOT(bufferListSelectionUpdated(const QModelIndex&, const QModelIndex&)));
+
 	m_bufferLinesModel = new BufferLinesModel(m_stateManager, this);
 	ui.messageView->setModel(m_bufferLinesModel);
 }
@@ -77,3 +80,11 @@ void MainWindow::bufferLinesUpdated(const WBufferInfoPtr &bufferInfo)
 	qDebug() << "\e[1;31mBuffer lines updated.\e[0m";
 }
 
+void MainWindow::bufferListSelectionUpdated(const QModelIndex &current, const QModelIndex &previous)
+{
+	qDebug() << "\e[1;32mBuffer list selection changed:" << current.row() << ".\e[0m";
+
+	WBufferInfoPtr bufferInfo = m_bufferListModel->getBufferAtIndex(current);
+
+	m_bufferLinesModel->setAssociatedBuffer(bufferInfo->getBufferPointer()->pointer);
+}

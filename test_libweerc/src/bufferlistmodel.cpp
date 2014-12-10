@@ -52,3 +52,11 @@ void BufferListModel::bufferListUpdated(const WBufferState::BufferInfoMap &buffe
 	QModelIndex bottomRight = createIndex(bufferInfoMap.size(), 0);
 	emit dataChanged(topLeft, bottomRight);
 }
+
+WBufferInfoPtr BufferListModel::getBufferAtIndex(const QModelIndex &index) const
+{
+		WBufferState::BufferInfoMap::const_iterator iter =
+			m_stateManager->getBufferState()->getBufferInfoMap().begin();
+
+		return *(iter + index.row());
+}

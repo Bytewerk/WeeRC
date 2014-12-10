@@ -19,6 +19,8 @@ class BufferListModel : public QAbstractListModel
 		int rowCount(const QModelIndex &parent) const;
 		QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
+		WBufferInfoPtr getBufferAtIndex(const QModelIndex &index) const;
+
 	private slots:
 		void bufferListUpdated(const WBufferState::BufferInfoMap &bufferInfoMap);
 };

@@ -80,6 +80,8 @@ void BufferLinesModel::setAssociatedBuffer(WPointer::value_type bufPtr)
 {
 	m_bufferInfo = m_stateManager->getBufferState()->getBufferInfo(bufPtr);
 	qDebug() << "BufferLinesModel is now associated with" << m_bufferInfo->getBufferPointer()->fullName;
+
+	emit layoutChanged();
 }
 
 void BufferLinesModel::bufferLinesUpdated(const WBufferInfoPtr &bufferInfo)
